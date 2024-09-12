@@ -14,6 +14,8 @@ private:
     QTime m_finalTime;
     QString m_difftime;
 
+    void calculateDifference();
+
 public:
     WorkTask(QString description, QTime initialTime, QTime finalTime);
     int getId() const;
@@ -21,7 +23,7 @@ public:
     QTime getInitialTime() const;
     QTime getFinalTime() const;
     QString getDifference() const;
-    void calculateDifference();
+
 };
 
 #endif // WORKTASK_H

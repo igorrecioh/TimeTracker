@@ -38,7 +38,6 @@ void MainWindow::on_addTimeButton_clicked()
         ui->statusBar->showMessage("Description is empty!");
     } else {
         WorkTask wt(ui->descriptionEdit->text(), ui->initTimeEdit->time(), ui->finalTimeEdit->time());
-        wt.calculateDifference();
         this->m_workTasks.append(wt);
         qDebug() << "Added!\n";
         ui->statusBar->showMessage("Added!");

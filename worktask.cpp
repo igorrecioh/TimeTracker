@@ -2,6 +2,7 @@
 
 WorkTask::WorkTask(QString description, QTime initialTime, QTime finalTime) : m_description{description}, m_initialTime{initialTime}, m_finalTime{finalTime}
 {
+    this->calculateDifference();
     m_id = ID;
     ID++;
 }
