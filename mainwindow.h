@@ -27,5 +27,7 @@ private:
     Ui::MainWindow *ui;
     QList<WorkTask> m_workTasks;
     WorkTaskModel *workTaskModel;
+
+    bool isOverlappingTask(QTime currentInitialTime);
 };
 #endif // MAINWINDOW_H

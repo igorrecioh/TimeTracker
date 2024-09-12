@@ -36,6 +36,8 @@ void MainWindow::on_addTimeButton_clicked()
     } else if (ui->descriptionEdit->text().trimmed() == "") {
         qDebug() << "Description is empty!\n";
         ui->statusBar->showMessage("Description is empty!");
+    } else if (isOverlappingTask(ui->initTimeEdit->time())) {
+        ui->statusBar->showMessage("Task overlaps with previous task!");
     } else {
         WorkTask wt(ui->descriptionEdit->text(), ui->initTimeEdit->time(), ui->finalTimeEdit->time());
         this->m_workTasks.append(wt);
@@ -77,9 +79,10 @@ void MainWindow::on_deleteTimeButton_clicked()
 
             switch(ret) {
                 case QMessageBox::Yes:
-                    // TODO: Borrar tarea de la lista
                     int idDelete = workTaskModel->index(index, 0).data().toInt();
                     qDebug() << "ID: " << idDelete << "\n";
+
+                    // Borrar tarea de la lista
                     for(int index = 0; index < m_workTasks.size(); index++) {
                         if (m_workTasks.at(index).getId() == idDelete){
                             m_workTasks.removeAt(index);
@@ -101,5 +104,17 @@ void MainWindow::on_deleteTimeButton_clicked()
                     break;
             }
         }
+}
+
+bool MainWindow::isOverlappingTask(QTime currentInitialTime)
+{
+    if (m_workTasks.length() == 0)
+    {
+        return false;
+    } else if (currentInitialTime < m_workTasks.at(m_workTasks.length() - 1).getFinalTime()) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
