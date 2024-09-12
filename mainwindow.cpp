@@ -40,12 +40,14 @@ void MainWindow::on_addTimeButton_clicked()
         WorkTask wt(ui->descriptionEdit->text(), ui->initTimeEdit->time(), ui->finalTimeEdit->time());
         this->m_workTasks.append(wt);
         qDebug() << "Added!\n";
-        ui->statusBar->showMessage("Added!");
+        ui->statusBar->showMessage("Added!", 5000);
 
+        // Limpiar campos
         ui->descriptionEdit->clear();
         ui->initTimeEdit->setTime(QTime(0, 0));
         ui->finalTimeEdit->setTime(QTime(0, 0));
 
+        // Refrescar modelo
         workTaskModel = new WorkTaskModel(this);
         workTaskModel->populateData(this->m_workTasks);
         ui->taskTable->setModel(workTaskModel);
